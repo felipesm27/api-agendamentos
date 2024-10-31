@@ -17,7 +17,7 @@ async function Listar() {
 async function ListarByEmail(email) {
   let sql = `select * from users where email = ?`;
   const user = await query(sql, [email]);
-  console.log(user);
+
   if (user.length == 0) return [];
   else return user[0];
 }
