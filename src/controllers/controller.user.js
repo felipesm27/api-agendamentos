@@ -5,9 +5,22 @@ import serviceUser from '../service/service.user.js';
 async function Inserir(req, res) {
 
     const { name, email, password } = req.body;
-    const user = await serviceUser.Inserir(name, email, password);
-    res.status(201).json(user);
 
+    const user = await serviceUser.Inserir(name, email, password);
+
+    res.status(201).json(user);
+}
+
+async function Login(req, res) {
+
+    const { email, password } = req.body;
+
+    const user = await serviceUser.Login(email, password);
+
+    if (user.length == 0)
+        res.status(401).json({ error: "E-mail ou senha inválida" });
+    else
+        res.status(200).json(user);
 }
 
 async function Listar(req, res) {
@@ -18,5 +31,4 @@ async function Listar(req, res) {
 }
 
 
-
-export default { Inserir, Listar };
+export default { Inserir, Listar, Login };

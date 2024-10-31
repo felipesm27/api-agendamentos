@@ -11,8 +11,11 @@ router.put('/doctors/:id_doctor', controllerDoctor.Editar)
 router.delete('/doctors/:id_doctor', controllerDoctor.Excluir)
 
 // Users
+router.post('/users/login', controllerUser.Login)
 router.post('/users/register', controllerUser.Inserir)
+
 router.get('/users', controllerUser.Listar)
+
 // Appointments
 
 // Services
