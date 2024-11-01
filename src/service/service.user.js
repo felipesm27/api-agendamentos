@@ -10,8 +10,14 @@ async function Inserir(name, email, password) {
 
 async function Listar() {
   const users = await repoUser.Listar();
+  // Mapeando cada usuário para um novo objeto contendo apenas os campos desejados
+  const filteredUsers = users.map(({ id_user, name, email }) => ({
+    id_user,
+    name,
+    email,
+  }));
 
-  return users;
+  return filteredUsers;
 }
 
 async function Login(email, password) {
