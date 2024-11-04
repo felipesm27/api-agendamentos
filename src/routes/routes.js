@@ -36,6 +36,6 @@ router.get(
   controllerAppointment.ListarbyUser
 );
 
-// Services
+router.post("/appointments", jwt.ValidateToken, controllerAppointment.Inserir);
 
 export default router;
