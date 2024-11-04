@@ -1,6 +1,7 @@
 import { Router } from "express";
 import controllerDoctor from "../controllers/controller.doctor.js";
 import controllerUser from "../controllers/controller.user.js";
+import controllerAppointment from "../controllers/controller.appoitment.js";
 import jwt from "../token.js";
 
 const router = Router();
@@ -28,6 +29,12 @@ router.post("/users/register", controllerUser.Inserir);
 router.get("/users", controllerUser.Listar);
 
 // Appointments
+
+router.get(
+  "/appointments",
+  jwt.ValidateToken,
+  controllerAppointment.ListarbyUser
+);
 
 // Services
 
