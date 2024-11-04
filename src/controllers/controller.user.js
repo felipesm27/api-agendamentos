@@ -1,34 +1,33 @@
-
-import serviceUser from '../service/service.user.js';
-
+import serviceUser from "../service/service.user.js";
 
 async function Inserir(req, res) {
+  const { name, email, password } = req.body;
 
-    const { name, email, password } = req.body;
+  const user = await serviceUser.Inserir(name, email, password);
 
-    const user = await serviceUser.Inserir(name, email, password);
-
-    res.status(201).json(user);
+  res.status(201).json(user);
 }
 
 async function Login(req, res) {
+  const { email, password } = req.body;
 
-    const { email, password } = req.body;
+  const user = await serviceUser.Login(email, password);
 
-    const user = await serviceUser.Login(email, password);
-
-    if (user.length == 0)
-        res.status(401).json({ error: "E-mail ou senha inválida" });
-    else
-        res.status(200).json(user);
+  if (user.length == 0)
+    res.status(401).json({ error: "E-mail ou senha inválida" });
+  else res.status(200).json(user);
 }
 
 async function Listar(req, res) {
-
-    const users = await serviceUser.Listar();
-    res.status(200).json(users);
-
+  const users = await serviceUser.Listar();
+  res.status(200).json(users);
 }
 
+async function Profile(req, res) {
+  const id_user = req.id_user;
+  const user = await serviceUser.Profile(id_user);
+  delete user.password;
+  res.status(200).json(user);
+}
 
-export default { Inserir, Listar, Login };
+export default { Inserir, Listar, Login, Profile };
